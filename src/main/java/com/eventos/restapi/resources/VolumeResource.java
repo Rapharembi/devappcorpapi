@@ -20,9 +20,13 @@ import com.eventos.restapi.models.Volume;
 import com.eventos.restapi.repository.ArtigoRepository;
 import com.eventos.restapi.repository.VolumeRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 
 @RestController
-@RequestMapping("/volumes")
+@RequestMapping("/api")
+//@Api(value="API Volumes")
 public class VolumeResource {
 
 	@Autowired
@@ -31,32 +35,38 @@ public class VolumeResource {
 	@Autowired
 	ArtigoRepository artigorepo;
 
-	@GetMapping("")
+	@GetMapping("/volumes")
+	@ApiOperation(value="Retorna todos os volumes")
 	public List<Volume> listaVolumes() {
 		return volumerepo.findAll();
 	}
 
 	@GetMapping("/volume/{Id}")
+	@ApiOperation(value="Retorna um volume com determinado id")
 	public Volume listaVolumeUnico(@PathVariable(value = "Id") int volumeId) {
 		return volumerepo.findById(volumeId);
 	}
 
 	@PostMapping("/volume")
+	@ApiOperation(value="Guarda um novo volume")
 	public Volume createVolume(@RequestBody Volume volume) {
 		return volumerepo.save(volume);
 	}
 
 	@PutMapping("/volume")
+	@ApiOperation(value="Atualiza um volume existente")
 	public Volume atualizaVolume(@RequestBody Volume volume) {
 		return volumerepo.save(volume);
 	}
 
 	@DeleteMapping("/volume")
+	@ApiOperation(value="Deleta um volume")
 	public void deletaVolume(@RequestBody Volume volume) {
 			volumerepo.delete(volume);
 	}
 
 	@GetMapping("volume/{Id}/artigos")
+	@ApiOperation(value="Retorna todos os artigos de um determinado volume")
 	public List<Artigo> listaArtigosDeVolume(@PathVariable(value = "Id") long volumeId) {
 		
 		return artigorepo.findByVolumeId(volumeId);
@@ -64,6 +74,7 @@ public class VolumeResource {
 	}
 		
 	@DeleteMapping("/volume/{Id}/artigos/{artigoId}")
+	@ApiOperation(value="Remove um artigo de um volume")
 	public void deletaArtigoDeVolume(@PathVariable(value="Id") long Id, @PathVariable(value="artigoId") long articleId) {
 		
 	artigorepo.deleteById(articleId);

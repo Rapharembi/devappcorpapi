@@ -14,37 +14,47 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.eventos.restapi.repository.AutorRepository;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import com.eventos.restapi.models.Autor;
 
 
 @RestController
-@RequestMapping(value="/autores")
+@RequestMapping(value="/api")
+//@Api(value="API Autores")
 public class AutorResource {
 
 	@Autowired
 	AutorRepository autorrepo;
 	
-	@GetMapping("")
+	@GetMapping("/autores")
+	@ApiOperation(value="Retorna todos os autores")
 	public List<Autor> listaArtigos(){
 		return autorrepo.findAll();
 	}
 	
 	@GetMapping("/autor/{id}")
+	@ApiOperation(value="Retorna autor com determinado id")
 	public Autor listaArtigoUnico(@PathVariable(value="id")int id){
 		return autorrepo.findById(id);
 	}
 	
 	@PostMapping("/autor")
+	@ApiOperation(value="Guarda um novo autor")
 	public Autor salvaArtigo(@RequestBody Autor autor) {
 		return autorrepo.save(autor);
 	}
 	
 	@DeleteMapping("/autor")
+	@ApiOperation(value="Deleta um autor")
 	public void deleteAutor(@RequestBody Autor autor) {
 			autorrepo.delete(autor);
 	}
 	
 	@PutMapping("/autor")
+	@ApiOperation(value="Atualiza um autor")
 	public Autor atualizaAutor(@RequestBody Autor autor) {
 		return autorrepo.save(autor);
 	}
