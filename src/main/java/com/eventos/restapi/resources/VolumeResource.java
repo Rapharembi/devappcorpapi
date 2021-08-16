@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +24,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
-//@Api(value="API Volumes")
+@RequestMapping(value="/api")
+@Api(value="API REST Volumes")
 public class VolumeResource {
 
 	@Autowired
@@ -59,10 +60,10 @@ public class VolumeResource {
 		return volumerepo.save(volume);
 	}
 
-	@DeleteMapping("/volume")
+	@DeleteMapping("/volume/{Id}")
 	@ApiOperation(value="Deleta um volume")
-	public void deletaVolume(@RequestBody Volume volume) {
-			volumerepo.delete(volume);
+	public void deletaVolume(@PathVariable(value="Id") long Id) {
+			volumerepo.deleteById(Id);
 	}
 
 	@GetMapping("volume/{Id}/artigos")

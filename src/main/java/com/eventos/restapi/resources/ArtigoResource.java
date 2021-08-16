@@ -22,10 +22,10 @@ import io.swagger.annotations.ApiOperation;
 import com.eventos.restapi.models.Artigo;
 import com.eventos.restapi.models.Autor;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/api")
 @Api(value="API REST Artigos")
-@CrossOrigin(origins = "*")
 public class ArtigoResource {
 
 	@Autowired
@@ -53,10 +53,10 @@ public class ArtigoResource {
 		return autorrepo.findByArtigoId(id);
 	}
 		
-	@DeleteMapping("/artigo")
+	@DeleteMapping("/artigo/{Id}")
 	@ApiOperation(value="Deleta um artigo")
-	public void deletaArtigo(@RequestBody Artigo artigo) {
-		artigorepo.delete(artigo);
+	public void deletaArtigo(@PathVariable(value="Id") long Id){
+		artigorepo.deleteById(Id);
 	}
 	
 	@PostMapping("/artigo")

@@ -3,6 +3,7 @@ package com.eventos.restapi.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +22,10 @@ import io.swagger.annotations.ApiOperation;
 import com.eventos.restapi.models.Autor;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value="/api")
-//@Api(value="API Autores")
+@Api(value="API REST Autores")
 public class AutorResource {
 
 	@Autowired
@@ -47,10 +49,10 @@ public class AutorResource {
 		return autorrepo.save(autor);
 	}
 	
-	@DeleteMapping("/autor")
+	@DeleteMapping("/autor/{Id}")
 	@ApiOperation(value="Deleta um autor")
-	public void deleteAutor(@RequestBody Autor autor) {
-			autorrepo.delete(autor);
+	public void deleteAutor(@PathVariable(value="Id") long Id) {
+			autorrepo.deleteById(Id);
 	}
 	
 	@PutMapping("/autor")
