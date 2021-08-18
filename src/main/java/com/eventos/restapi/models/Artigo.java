@@ -132,8 +132,8 @@ public class Artigo {
         return pchavePt;
     }
 
-    public void setPChavePT(String pChavePT) {
-       this.pchavePt = pChavePT;
+    public void setPChavePt(String pChavePt) {
+       this.pchavePt = pChavePt;
     }
 
     public String getPchaveIng() {

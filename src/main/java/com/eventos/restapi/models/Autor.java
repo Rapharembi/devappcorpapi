@@ -74,7 +74,23 @@ public class Autor {
         return id;
     }
 
-    public void setId(long id) {
+    public int getOrdemArtigo() {
+		return ordemArtigo;
+	}
+
+	public void setOrdemArtigo(int ordemArtigo) {
+		this.ordemArtigo = ordemArtigo;
+	}
+
+	public String getOrcID() {
+		return orcID;
+	}
+
+	public void setOrcID(String orcID) {
+		this.orcID = orcID;
+	}
+
+	public void setId(long id) {
         this.id = id;
     }
 
