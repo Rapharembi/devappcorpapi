@@ -18,6 +18,7 @@ id	| Id para identificação do volume no sistema (chave única) |
 sigla	| Sigla do evento
 
 ### GET api/volumes - Lista todos os volumes
+Exemplo de resposta (200)
 
 ``` Exemplo de resposta (200)
 [
@@ -60,9 +61,52 @@ sigla	| Sigla do evento
   }
 ]
 ```
-
+### GET api/volume/:Id/artigos - Lista todos os artigos de um determinado volume
+Exemplo de resposta (200)
+```
+[
+  {
+    "autores": [
+      {
+        "afiliacaoIng": "string",
+        "afiliacaoPt": "string",
+        "email": "string",
+        "id": 0,
+        "meioNome": "string",
+        "orcID": "string",
+        "ordemArtigo": 0,
+        "pais": "string",
+        "primNome": "string",
+        "ultiNome": "string"
+      }
+    ],
+    "id": 0,
+    "idioma": "string",
+    "ordemVolume": 0,
+    "pchaveIng": "string",
+    "pchavePt": "string",
+    "quantidadePaginas": 0,
+    "resumoIng": "string",
+    "resumoPt": "string",
+    "tituloIng": "string",
+    "tituloOriginal": "string",
+    "volume": {
+      "artigos": [
+        null
+      ],
+      "cidade": "string",
+      "data": "string",
+      "descIng": "string",
+      "descPt": "string",
+      "edicao": 0,
+      "id": 0,
+      "sigla": "string"
+    }
+  }
+]
+```
 ### GET api/volume/:Id - Lista um volume por Id
-
+Exemplo de resposta (200)
 `````` Exemplo de resposta (200)
 [
   {
@@ -118,6 +162,8 @@ id	| Id para identificação do volume no sistema (chave única) |
 sigla	| Sigla do evento
 artigos | informações referentes aos artigos e autores neles contidos |
 
+Exemplo de Body
+
 ``` Exemplo de Body
 {
   "artigos": [
@@ -162,12 +208,16 @@ artigos | informações referentes aos artigos e autores neles contidos |
 
 | Body | Descrição |
 | --- | --- |
-| initials | Sigla do evento (Máximo 32 caracteres) |
-| edition | Número da edição do evento |
-| city | Cidade onde foi realizado o evento |
-| startDate | Data de início do evento |
-| portugueseDescription | Descrição em português |
-| englishDescription | Descrição em inglês |
+cidade	| Cidade onde o evento será realizado |
+data	| Data do evento |
+descIng	| Descrição do evento em inglês |
+descPt  | Descrição do evento em português |
+edicao	| Número da edição desse evento |
+id	| Id para identificação do volume no sistema (chave única) |
+sigla	| Sigla do evento
+artigos | informações referentes aos artigos e autores neles contidos |
+
+Exemplo de Body
 
 ```Exemplo de Body
 {
@@ -219,133 +269,225 @@ Representa os artigos dos volumes
 
 | Atributo | Descrição |
 | --- | --- |
-| id | Chave única para identificação do volume |
-| volumeOrder | Ordem do artigo no volume |
-| originalTitle | Título original |
-| englishTitle | Título em inglês |
-| originalSummary | Resumo original |
-| englishSummary | Resumo em inglês  |
-| language | Idioma do artigo ("pt", "en" ou "es") |
-| originalKeywords | Palavras-chaves originais (separadas por ";")  |
-| englishKeywords | Palavras-chaves em inglês (separadas por ";") |
-| numberOfPages | Número de páginas |
+|id	|  Id para identificação do volume no sistema (chave única) |
+|idioma	 | Idioma do artigo |
+|ordemVolume	| Ordem em que o artigo está armazenado no volume |
+|pchaveIng	| Palavras chave do artigo em inglês|
+|pchavePt	 | Palavras chave do artigo em português |
+|quantidadePaginas | Quantidade de páginas do artigo|
+|resumoIng	| Resumo do artigo em inglês|
+|resumoPt	| Resumo do artigo em português|
+|tituloIng	 | Título do artigo em inglês |
+|tituloOriginal	| Título do artigo em português |
 
-### GET /volumes/:volumeId/articles - Lista todos os artigos de um volume
+### GET api/artigos - Lista todos os artigos
+Exemplo de resposta (200)
 
-```json
+```
 [
   {
-    "id": 3,
-    "volumeOrder": 1,
-    "language": "pt",
-    "originalTitle": "Título 999",
-    "englishTitle": "Title 999",
-    "originalSummary": "Um sumário",
-    "englishSummary": "One summary",
-    "originalKeywords": "palavra,novo",
-    "englishKeywords": "word,new",
-    "numberOfPages": 10,
-    "authors": [
+    "autores": [
       {
-        "id": 5,
-        "articleOrder": 1,
-        "email": "email@email.com",
-        "firstName": "Nome 1",
-        "middleName": "Nome 2",
-        "lastName": "Nome 3",
-        "affiliation": "ABC",
-        "englishAffiliation": "CBA",
-        "country": "BR",
-        "orcID": "1234-1234-1234-1234"
+        "afiliacaoIng": "string",
+        "afiliacaoPt": "string",
+        "email": "string",
+        "id": 0,
+        "meioNome": "string",
+        "orcID": "string",
+        "ordemArtigo": 0,
+        "pais": "string",
+        "primNome": "string",
+        "ultiNome": "string"
       }
-    ]
+    ],
+    "id": 0,
+    "idioma": "string",
+    "ordemVolume": 0,
+    "pchaveIng": "string",
+    "pchavePt": "string",
+    "quantidadePaginas": 0,
+    "resumoIng": "string",
+    "resumoPt": "string",
+    "tituloIng": "string",
+    "tituloOriginal": "string",
+    "volume": {
+      "artigos": [
+        null
+      ],
+      "cidade": "string",
+      "data": "string",
+      "descIng": "string",
+      "descPt": "string",
+      "edicao": 0,
+      "id": 0,
+      "sigla": "string"
+    }
   }
 ]
 ```
 
-### GET /volumes/:volumeId/articles/:articleId - Lista um artigo de um volume
+### GET api/artigo/:Id - Lista um determinado artigo por Id
+Exemplo de resposta (200)
 
-```json
-{
-  "id": 3,
-  "volumeOrder": 1,
-  "language": "pt",
-  "originalTitle": "Título 1",
-  "englishTitle": "Title 1",
-  "originalSummary": "Um sumário",
-  "englishSummary": "One summary",
-  "originalKeywords": "palavra,novo",
-  "englishKeywords": "word,new",
-  "numberOfPages": 10,
-  "authors": []
-}
+```
+[
+  {
+    "autores": [
+      {
+        "afiliacaoIng": "string",
+        "afiliacaoPt": "string",
+        "email": "string",
+        "id": 0,
+        "meioNome": "string",
+        "orcID": "string",
+        "ordemArtigo": 0,
+        "pais": "string",
+        "primNome": "string",
+        "ultiNome": "string"
+      }
+    ],
+    "id": 0,
+    "idioma": "string",
+    "ordemVolume": 0,
+    "pchaveIng": "string",
+    "pchavePt": "string",
+    "quantidadePaginas": 0,
+    "resumoIng": "string",
+    "resumoPt": "string",
+    "tituloIng": "string",
+    "tituloOriginal": "string",
+    "volume": {
+      "artigos": [
+        null
+      ],
+      "cidade": "string",
+      "data": "string",
+      "descIng": "string",
+      "descPt": "string",
+      "edicao": 0,
+      "id": 0,
+      "sigla": "string"
+    }
+  }
+]
 ```
 
-### POST /volumes/:volumeId/articles - Cria um artigo de um volume
+### GET api/artigo/:Id/autores - Lista todos os autores de um determinado artigo
+Exemplo de resposta (200)
+
+```
+[
+  {
+    "afiliacaoIng": "string",
+    "afiliacaoPt": "string",
+    "artigo": {
+      "autores": [
+        null
+      ],
+      "id": 0,
+      "idioma": "string",
+      "ordemVolume": 0,
+      "pchaveIng": "string",
+      "pchavePt": "string",
+      "quantidadePaginas": 0,
+      "resumoIng": "string",
+      "resumoPt": "string",
+      "tituloIng": "string",
+      "tituloOriginal": "string",
+      "volume": {
+        "artigos": [
+          null
+        ],
+        "cidade": "string",
+        "data": "string",
+        "descIng": "string",
+        "descPt": "string",
+        "edicao": 0,
+        "id": 0,
+        "sigla": "string"
+      }
+    },
+    "email": "string",
+    "id": 0,
+    "meioNome": "string",
+    "orcID": "string",
+    "ordemArtigo": 0,
+    "pais": "string",
+    "primNome": "string",
+    "ultiNome": "string"
+  }
+]
+```
+
+### POST api/artigo - Cria um artigo de um volume
 
 | Body | Descrição |
 | --- | --- |
-| volumeOrder | Ordem do artigo no volume |
-| originalTitle | Título original |
-| englishTitle | Título em inglês |
-| originalSummary | Resumo original |
-| englishSummary | Resumo em inglês  |
-| language | Idioma do artigo ("pt", "en" ou "es") |
-| originalKeywords | Palavras-chaves originais (separadas por ";")  |
-| englishKeywords | Palavras-chaves em inglês (separadas por ";") |
-| numberOfPages | Número de páginas |
+|id	|  Id para identificação do volume no sistema (chave única) |
+|idioma	 | Idioma do artigo |
+|ordemVolume	| Ordem em que o artigo está armazenado no volume |
+|pchaveIng	| Palavras chave do artigo em inglês|
+|pchavePt	 | Palavras chave do artigo em português |
+|quantidadePaginas | Quantidade de páginas do artigo|
+|resumoIng	| Resumo do artigo em inglês|
+|resumoPt	| Resumo do artigo em português|
+|tituloIng	 | Título do artigo em inglês |
+|tituloOriginal	| Título do artigo em português |
+
+Exemplo de Body
 
 ```json
-{
-  "id": 4,
-  "volumeOrder": 2,
-  "language": "pt",
-  "originalTitle": "Título 2",
-  "englishTitle": "Title 2",
-  "originalSummary": "Um sumário",
-  "englishSummary": "One summary",
-  "originalKeywords": "palavra,novo",
-  "englishKeywords": "word,new",
-  "numberOfPages": 10,
-  "authors": null
-}
+ {
+    "id": 0,
+    "ordemVolume": 3,
+    "idioma": "jp",
+    "tituloIng": "test arcticle",
+    "resumoPt": "artigo teste ",
+    "resumoIng": "test arcticle",
+    "pchavePt": "palavra chave ptbr",
+    "pchaveIng": "key word english",
+    "autores": [],
+    "quantidadePaginas": 45,
+    "tituloOriginal": "teste artigo"
+  }
 ```
 
-### PUT /volumes/:volumeId/articles/:articleId - Atualiza um artigo de um volume
+### PUT api/artigo - Atualiza um artigo de um volume
 
 | Body | Descrição |
 | --- | --- |
-| volumeOrder | Ordem do artigo no volume |
-| originalTitle | Título original |
-| englishTitle | Título em inglês |
-| originalSummary | Resumo original |
-| englishSummary | Resumo em inglês  |
-| language | Idioma do artigo ("pt", "en" ou "es") |
-| originalKeywords | Palavras-chaves originais (separadas por ";")  |
-| englishKeywords | Palavras-chaves em inglês (separadas por ";") |
-| numberOfPages | Número de páginas |
+|id	|  Id para identificação do volume no sistema (chave única) |
+|idioma	 | Idioma do artigo |
+|ordemVolume	| Ordem em que o artigo está armazenado no volume |
+|pchaveIng	| Palavras chave do artigo em inglês|
+|pchavePt	 | Palavras chave do artigo em português |
+|quantidadePaginas | Quantidade de páginas do artigo|
+|resumoIng	| Resumo do artigo em inglês|
+|resumoPt	| Resumo do artigo em português|
+|tituloIng	 | Título do artigo em inglês |
+|tituloOriginal	| Título do artigo em português |
+
+Exemplo de Body
 
 ```json
-{
-  "id": 3,
-  "volumeOrder": 1,
-  "language": "pt",
-  "originalTitle": "Título 999",
-  "englishTitle": "Title 999",
-  "originalSummary": "Um sumário",
-  "englishSummary": "One summary",
-  "originalKeywords": "palavra,novo",
-  "englishKeywords": "word,new",
-  "numberOfPages": 10,
-  "authors": null
-}
+ {
+    "id": 0,
+    "ordemVolume": 3,
+    "idioma": "jp",
+    "tituloIng": "test put",
+    "resumoPt": "teste put ",
+    "resumoIng": "teste put",
+    "pchavePt": "teste put",
+    "pchaveIng": "teste put",
+    "autores": [],
+    "quantidadePaginas": 45,
+    "tituloOriginal": "teste put"
+  }
 ```
 
-### DELETE /volumes/:volumeId/articles/:articleId - Deleta um artigo de um volume
+### DELETE api/artigo/:Id - Deleta um determinado artigo por Id
 
-```json
-No Content
-```
+### DELETE api/artigo/:Id/autores/:autorId - Deleta um determinado autor de um artigo
 
 ## Autor
 
