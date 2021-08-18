@@ -3,6 +3,8 @@
 
 O objetivo dessa API é cadastrar dados de eventos científicos, especificando os volumes de artigos de um determinado evento, informações dos artigos desse volume e dos autores de cada artigo.
 
+O programa tem um swagger que pode ser acessado pela url http://localhost:8080/swagger-ui/ quando deployado localmente
+
 ## Volume
 
 Representa o agregado de artigos aceitos em um dado evento
