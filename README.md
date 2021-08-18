@@ -1,7 +1,7 @@
 
-# REST API Endpoints Documentation
+# Eventos Cientificos API REST
 
-O objetivo do trabalho é criar um sistema para cadastrar anais de eventos científicos. Esses anais são agregados em volumes de artigos e cada artigo tem seus autores.
+O objetivo dessa API é cadastrar dados de eventos científicos, especificando os volumes de artigos de um determinado evento, informações dos artigos desse volume e dos autores de cada artigo.
 
 ## Volume
 
@@ -9,121 +9,152 @@ Representa o agregado de artigos aceitos em um dado evento
 
 | Atributo | Descrição |
 | --- | --- |
-| id | Chave única para identificação do volume |
-| initials | Sigla do evento (Máximo 32 caracteres) |
-| edition | Número da edição do evento |
-| city | Cidade onde foi realizado o evento |
-| startDate | Data de início do evento |
-| portugueseDescription | Descrição em português |
-| englishDescription | Descrição em inglês |
+cidade	| Cidade onde o evento será realizado |
+data	| Data do evento |
+descIng	| Descrição do evento em inglês |
+descPt  | Descrição do evento em português |
+edicao	| Número da edição desse evento |
+id	| Id para identificação do volume no sistema (chave única) |
+sigla	| Sigla do evento
 
-### GET /volumes - Lista todos os volumes
+### GET api/volumes - Lista todos os volumes
 
-```json
+``` Exemplo de resposta (200)
 [
   {
-    "id": 1,
-    "initials": "initials",
-    "edition": 1,
-    "city": "city",
-    "startDate": "2021-08-10",
-    "portugueseDescription": "portugueseDescription",
-    "englishDescription": "englishDescription",
-    "articles": [
+    "artigos": [
       {
-        "id": 2,
-        "volumeOrder": 1,
-        "language": "pt",
-        "originalTitle": "Título 999",
-        "englishTitle": "Title 999",
-        "originalSummary": "Um sumário",
-        "englishSummary": "One summary",
-        "originalKeywords": "palavra,novo",
-        "englishKeywords": "word,new",
-        "numberOfPages": 10,
-        "authors": [
+        "autores": [
           {
-            "id": 3,
-            "articleOrder": 1,
-            "email": "email@email.com",
-            "firstName": "Nome 1",
-            "middleName": "Nome 2",
-            "lastName": "Nome 3",
-            "affiliation": "ABC",
-            "englishAffiliation": "CBA",
-            "country": "BR",
-            "orcID": "1234-1234-1234-1234"
+            "afiliacaoIng": "string",
+            "afiliacaoPt": "string",
+            "email": "string",
+            "id": 0,
+            "meioNome": "string",
+            "orcID": "string",
+            "ordemArtigo": 0,
+            "pais": "string",
+            "primNome": "string",
+            "ultiNome": "string"
           }
-        ]
+        ],
+        "id": 0,
+        "idioma": "string",
+        "ordemVolume": 0,
+        "pchaveIng": "string",
+        "pchavePt": "string",
+        "quantidadePaginas": 0,
+        "resumoIng": "string",
+        "resumoPt": "string",
+        "tituloIng": "string",
+        "tituloOriginal": "string"
       }
-    ]
+    ],
+    "cidade": "string",
+    "data": "string",
+    "descIng": "string",
+    "descPt": "string",
+    "edicao": 0,
+    "id": 0,
+    "sigla": "string"
   }
 ]
 ```
 
-### GET /volumes/:volumeId - Lista um volume
+### GET api/volume/:Id - Lista um volume por Id
 
-```json
-{
-	"id": 1,
-	"initials": "initials",
-	"edition": 1,
-	"city": "city",
-	"startDate": "2021-08-10",
-	"portugueseDescription": "portugueseDescription",
-	"englishDescription": "englishDescription",
-	"articles": [
-		{
-			"id": 2,
-			"volumeOrder": 1,
-			"language": "pt",
-			"originalTitle": "Título 999",
-			"englishTitle": "Title 999",
-			"originalSummary": "Um sumário",
-			"englishSummary": "One summary",
-			"originalKeywords": "palavra,novo",
-			"englishKeywords": "word,new",
-			"numberOfPages": 10,
-			"authors": [
-				{
-					"id": 3,
-					"articleOrder": 1,
-					"email": "email@email.com",
-					"firstName": "Nome 1",
-					"middleName": "Nome 2",
-					"lastName": "Nome 3",
-					"affiliation": "ABC",
-					"englishAffiliation": "CBA",
-					"country": "BR",
-					"orcID": "1234-1234-1234-1234"
-				}
-			]
-		}
-	]
-}
+`````` Exemplo de resposta (200)
+[
+  {
+    "artigos": [
+      {
+        "autores": [
+          {
+            "afiliacaoIng": "string",
+            "afiliacaoPt": "string",
+            "email": "string",
+            "id": 0,
+            "meioNome": "string",
+            "orcID": "string",
+            "ordemArtigo": 0,
+            "pais": "string",
+            "primNome": "string",
+            "ultiNome": "string"
+          }
+        ],
+        "id": 0,
+        "idioma": "string",
+        "ordemVolume": 0,
+        "pchaveIng": "string",
+        "pchavePt": "string",
+        "quantidadePaginas": 0,
+        "resumoIng": "string",
+        "resumoPt": "string",
+        "tituloIng": "string",
+        "tituloOriginal": "string"
+      }
+    ],
+    "cidade": "string",
+    "data": "string",
+    "descIng": "string",
+    "descPt": "string",
+    "edicao": 0,
+    "id": 0,
+    "sigla": "string"
+  }
+]
 ```
 
-### POST /volumes - Cria um volume
+### POST api/volume - Cria um volume
 
 | Body | Descrição |
 | --- | --- |
-| initials | Sigla do evento (Máximo 32 caracteres) |
-| edition | Número da edição do evento |
-| city | Cidade onde foi realizado o evento |
-| startDate | Data de início do evento |
-| portugueseDescription | Descrição em português |
-| englishDescription | Descrição em inglês |
+cidade	| Cidade onde o evento será realizado |
+data	| Data do evento |
+descIng	| Descrição do evento em inglês |
+descPt  | Descrição do evento em português |
+edicao	| Número da edição desse evento |
+id	| Id para identificação do volume no sistema (chave única) |
+sigla	| Sigla do evento
+artigos | informações referentes aos artigos e autores neles contidos |
 
-```json
+``` Exemplo de Body
 {
-	"id": 1,
-	"initials": "initials",
-	"edition": 1,
-	"city": "city",
-	"startDate": "2021-08-10",
-	"portugueseDescription": "portugueseDescription",
-	"englishDescription": "englishDescription",
-	"articles": []
+  "artigos": [
+    {
+      "autores": [
+        {
+          "afiliacaoIng": "uff",
+          "afiliacaoPt": "uff",
+          "email": "testepost@uff.br",
+          "id": 0,
+          "meioNome": "metodo",
+          "orcID": "1234",
+          "ordemArtigo": 1,
+          "pais": "br",
+          "primNome": "teste",
+          "ultiNome": "post"
+        }
+      ],
+      "id": 0,
+      "idioma": "pt",
+      "ordemVolume": 1,
+      "pchaveIng": "keyword",
+      "pchavePt": "palavrachave",
+      "quantidadePaginas": 23,
+      "resumoIng": "resume",
+      "resumoPt": "resumo",
+      "tituloIng": "title",
+      "tituloOriginal": "titulo"
+    }
+  ],
+  "cidade": "rio de janeiro",
+  "data": "2021-03-04",
+  "descIng": "description",
+  "descPt": "descricao",
+  "edicao": 2,
+  "id": 0,
+  "sigla": "et"
 }
 ```
 
@@ -138,24 +169,49 @@ Representa o agregado de artigos aceitos em um dado evento
 | portugueseDescription | Descrição em português |
 | englishDescription | Descrição em inglês |
 
-```json
+```Exemplo de Body
 {
-	"id": 1,
-	"initials": "initials 2",
-	"edition": 1,
-	"city": "city",
-	"startDate": "2021-08-10",
-	"portugueseDescription": "portugueseDescription",
-	"englishDescription": "englishDescription",
-	"articles": []
+  "artigos": [
+    {
+      "autores": [
+        {
+          "afiliacaoIng": "uff",
+          "afiliacaoPt": "uff",
+          "email": "testepost@uff.br",
+          "id": 0,
+          "meioNome": "metodo",
+          "orcID": "1234",
+          "ordemArtigo": 1,
+          "pais": "br",
+          "primNome": "teste",
+          "ultiNome": "post"
+        }
+      ],
+      "id": 0,
+      "idioma": "pt",
+      "ordemVolume": 1,
+      "pchaveIng": "keyword",
+      "pchavePt": "palavrachave",
+      "quantidadePaginas": 23,
+      "resumoIng": "resume",
+      "resumoPt": "resumo",
+      "tituloIng": "title",
+      "tituloOriginal": "titulo"
+    }
+  ],
+  "cidade": "teste put",
+  "data": "2021-03-04",
+  "descIng": "teste put",
+  "descPt": "teste put",
+  "edicao": 2,
+  "id": 0,
+  "sigla": "et"
 }
 ```
 
-### DELETE /volumes/:volumeId - Deleta um volume
+### DELETE api/volume/:Id - Deleta um volume por Id
 
-```json
-No Content
-```
+### DELETE api/volume/:Id/artigos/:artigoId - Deleta um artigo de um determinado volume por Id
 
 ## Artigo
 
