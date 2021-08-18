@@ -269,7 +269,7 @@ Representa os artigos dos volumes
 
 | Atributo | Descrição |
 | --- | --- |
-|id	|  Id para identificação do volume no sistema (chave única) |
+|id	|  Id para identificação do artigo no sistema (chave única) |
 |idioma	 | Idioma do artigo |
 |ordemVolume	| Ordem em que o artigo está armazenado no volume |
 |pchaveIng	| Palavras chave do artigo em inglês|
@@ -423,7 +423,7 @@ Exemplo de resposta (200)
 
 | Body | Descrição |
 | --- | --- |
-|id	|  Id para identificação do volume no sistema (chave única) |
+|id	|  Id para identificação do artigo no sistema (chave única) |
 |idioma	 | Idioma do artigo |
 |ordemVolume	| Ordem em que o artigo está armazenado no volume |
 |pchaveIng	| Palavras chave do artigo em inglês|
@@ -491,117 +491,182 @@ Exemplo de Body
 
 ## Autor
 
-Representa os autores dos artigos dos volumes
+Representa os autores dos artigos
 
 | Atributo | Descrição |
 | --- | --- |
-| id | Chave única para identificação do volume |
-| articleOrder | Ordem do artigo no volume |
-| email | E-mail do autor |
-| firstName | Primeiro nome do autor |
-| middleName | Nome do meio do autor |
-| lastName | Sobrenome do autor  |
-| affiliation | Afiliação do autor |
-| englishAffiliation | Afiliação do autor em inglês  |
-| country | País do autor ("BR", "PT", "US", "FR", "UK", ou "ES") |
-| orcID | Regitro OrcID ("XXXX-XXXX-XXXX-XXXX") |
+|afiliacaoIng	| Afiliação do autor em inglês
+|afiliacaoPt | Afiliação do autor em português
+|artigo | Informações referentes ao artigo que o autor escreveu
+|email	| Email do autor
+|id	|  Id para identificação do autor no sistema (chave única) |
+|meioNome	| Nome do meio do autor
+|orcID	| Registro OrcID
+|ordemArtigo | Ordem do artigo no volume
+|pais	| País do autor
+|primNome	| Primeiro nome do autor
+|ultiNome	| Último nome do autor
 
-### GET /articles/:articleId/authors - Lista todos os autores de um artigo
+
+### GET api/autores - Lista todos os autores 
+Exemplo de resposta (200)
 
 ```json
 [
   {
-    "id": 5,
-    "articleOrder": 1,
-    "email": "email@email.com",
-    "firstName": "Nome 1",
-    "middleName": "Nome 2",
-    "lastName": "Nome 3",
-    "affiliation": "ABC",
-    "englishAffiliation": "CBA",
-    "country": "BR",
-    "orcID": "1234-1234-1234-1234"
+    "afiliacaoIng": "string",
+    "afiliacaoPt": "string",
+    "artigo": {
+      "autores": [
+        null
+      ],
+      "id": 0,
+      "idioma": "string",
+      "ordemVolume": 0,
+      "pchaveIng": "string",
+      "pchavePt": "string",
+      "quantidadePaginas": 0,
+      "resumoIng": "string",
+      "resumoPt": "string",
+      "tituloIng": "string",
+      "tituloOriginal": "string",
+      "volume": {
+        "artigos": [
+          null
+        ],
+        "cidade": "string",
+        "data": "string",
+        "descIng": "string",
+        "descPt": "string",
+        "edicao": 0,
+        "id": 0,
+        "sigla": "string"
+      }
+    },
+    "email": "string",
+    "id": 0,
+    "meioNome": "string",
+    "orcID": "string",
+    "ordemArtigo": 0,
+    "pais": "string",
+    "primNome": "string",
+    "ultiNome": "string"
   }
 ]
 ```
 
-### GET /articles/:articleId/authors/:authorId - Lista um autor de um artigo
+
+### GET api/autor/:Id - Lista um determinado autor por Id
+Exemplo de resposta (200)
 
 ```json
-{
-  "id": 5,
-  "articleOrder": 1,
-  "email": "email@email.com",
-  "firstName": "Nome 1",
-  "middleName": "Nome 2",
-  "lastName": "Nome 3",
-  "affiliation": "ABC",
-  "englishAffiliation": "CBA",
-  "country": "BR",
-  "orcID": "1234-1234-1234-1234"
-}
+[
+  {
+    "afiliacaoIng": "string",
+    "afiliacaoPt": "string",
+    "artigo": {
+      "autores": [
+        null
+      ],
+      "id": 0,
+      "idioma": "string",
+      "ordemVolume": 0,
+      "pchaveIng": "string",
+      "pchavePt": "string",
+      "quantidadePaginas": 0,
+      "resumoIng": "string",
+      "resumoPt": "string",
+      "tituloIng": "string",
+      "tituloOriginal": "string",
+      "volume": {
+        "artigos": [
+          null
+        ],
+        "cidade": "string",
+        "data": "string",
+        "descIng": "string",
+        "descPt": "string",
+        "edicao": 0,
+        "id": 0,
+        "sigla": "string"
+      }
+    },
+    "email": "string",
+    "id": 0,
+    "meioNome": "string",
+    "orcID": "string",
+    "ordemArtigo": 0,
+    "pais": "string",
+    "primNome": "string",
+    "ultiNome": "string"
+  }
+]
 ```
 
-### POST /articles/:articleId/authors - Cria um autor para um artigo
+### POST api/autor - Cria um novo autor
 
 | Body | Descrição |
 | --- | --- |
-| articleOrder | Ordem do artigo no volume |
-| email | E-mail do autor |
-| firstName | Primeiro nome do autor |
-| middleName | Nome do meio do autor |
-| lastName | Sobrenome do autor  |
-| affiliation | Afiliação do autor |
-| englishAffiliation | Afiliação do autor em inglês  |
-| country | País do autor ("BR", "PT", "US", "FR", "UK", ou "ES") |
-| orcID | Regitro OrcID ("XXXX-XXXX-XXXX-XXXX") |
+|afiliacaoIng	| Afiliação do autor em inglês
+|afiliacaoPt | Afiliação do autor em português
+|artigo | Informações referentes ao artigo que o autor escreveu
+|email	| Email do autor
+|id	|  Id para identificação do autor no sistema (chave única) |
+|meioNome	| Nome do meio do autor
+|orcID	| Registro OrcID
+|ordemArtigo | Ordem do artigo no volume
+|pais	| País do autor
+|primNome	| Primeiro nome do autor
+|ultiNome	| Último nome do autor
+
+Exemplo de Body
 
 ```json
-{
-  "id": 6,
-  "articleOrder": 1,
-  "email": "email@email.com",
-  "firstName": "Nome 2",
-  "middleName": "Nome 3",
-  "lastName": "Nome 4",
-  "affiliation": "ABC",
-  "englishAffiliation": "CBA",
-  "country": "BR",
-  "orcID": "1234-1234-1234-1234"
-}
+ {
+    "id": 0,
+    "ordemArtigo": 1,
+    "email": "testepost@uff.br",
+    "primNome": "teste",
+    "meioNome": "metodo",
+    "ultiNome": "post",
+    "afiliacaoPt": "uff",
+    "afiliacaoIng": "uff",
+    "pais": "br",
+    "orcID": "1234-4351-4532-1234"
+  }
 ```
 
-### PUT /articles/:articleId/authors/:authorId - Atualiza um autor de um artigo
+### PUT api/autor - Atualiza um autor 
 
 | Body | Descrição |
 | --- | --- |
-| articleOrder | Ordem do artigo no volume |
-| email | E-mail do autor |
-| firstName | Primeiro nome do autor |
-| middleName | Nome do meio do autor |
-| lastName | Sobrenome do autor  |
-| affiliation | Afiliação do autor |
-| englishAffiliation | Afiliação do autor em inglês  |
-| country | País do autor ("BR", "PT", "US", "FR", "UK", ou "ES") |
-| orcID | Regitro OrcID ("XXXX-XXXX-XXXX-XXXX") |
+|afiliacaoIng	| Afiliação do autor em inglês
+|afiliacaoPt | Afiliação do autor em português
+|artigo | Informações referentes ao artigo que o autor escreveu
+|email	| Email do autor
+|id	|  Id para identificação do autor no sistema (chave única) |
+|meioNome	| Nome do meio do autor
+|orcID	| Registro OrcID
+|ordemArtigo | Ordem do artigo no volume
+|pais	| País do autor
+|primNome	| Primeiro nome do autor
+|ultiNome	| Último nome do autor
+
+Exemplo de Body
 
 ```json
-{
-  "id": 6,
-  "articleOrder": 2,
-  "email": "email222@email.com",
-  "firstName": "Nome 1",
-  "middleName": "Nome 2",
-  "lastName": "Nome 3",
-  "affiliation": "ABC",
-  "englishAffiliation": "CBA",
-  "country": "BR",
-  "orcID": "1234-1234-1234-1234"
-}
+ {
+    "id": 0,
+    "ordemArtigo": 1,
+    "email": "testeput@uff.br",
+    "primNome": "teste",
+    "meioNome": "metodo",
+    "ultiNome": "put",
+    "afiliacaoPt": "put",
+    "afiliacaoIng": "put",
+    "pais": "br",
+    "orcID": "1234-4351-4532-1234"
+  }
 ```
 
-### DELETE /articles/:articleId/authors/:authorId - Deleta um autor de um artigo
-
-```json
-No Content
-```
+### DELETE api/autor/:Id - Deleta um determinado autor por Id
